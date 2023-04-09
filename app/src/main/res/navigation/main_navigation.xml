@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/kostListFragment">
+
+    <fragment
+        android:id="@+id/kostListFragment"
+        android:name="com.nmp.ubayakost_160420016.view.KostListFragment"
+        android:label="fragment_kost_list"
+        tools:layout="@layout/fragment_kost_list" >
+        <action
+            android:id="@+id/action_kostListFragment_to_kostDetailFragment"
+            app:destination="@id/kostDetailFragment" />
+        <action
+            android:id="@+id/action_kostListFragment_to_riwayatListFragment"
+            app:destination="@id/riwayatListFragment" />
+        <action
+            android:id="@+id/action_kostListFragment_to_pesananListFragment"
+            app:destination="@id/pesananListFragment" />
+        <action
+            android:id="@+id/action_kostListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_kostListFragment_to_favoriteListFragment"
+            app:destination="@id/favoriteListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.nmp.ubayakost_160420016.view.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_kostListFragment"
+            app:destination="@id/kostListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.nmp.ubayakost_160420016.view.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kostDetailFragment"
+        android:name="com.nmp.ubayakost_160420016.view.KostDetailFragment"
+        android:label="fragment_kost_detail"
+        tools:layout="@layout/fragment_kost_detail" >
+        <action
+            android:id="@+id/action_kostDetailFragment_to_kostListFragment"
+            app:destination="@id/kostListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/riwayatListFragment"
+        android:name="com.nmp.ubayakost_160420016.view.RiwayatListFragment"
+        android:label="fragment_riwayat_list"
+        tools:layout="@layout/fragment_riwayat_list" >
+        <action
+            android:id="@+id/action_riwayatListFragment_to_kostListFragment"
+            app:destination="@id/kostListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pesananListFragment"
+        android:name="com.nmp.ubayakost_160420016.view.PesananListFragment"
+        android:label="fragment_pesanan_list"
+        tools:layout="@layout/fragment_pesanan_list" >
+        <action
+            android:id="@+id/action_pesananListFragment_to_kostListFragment"
+            app:destination="@id/kostListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.nmp.ubayakost_160420016.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_kostListFragment"
+            app:destination="@id/kostListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteListFragment"
+        android:name="com.nmp.ubayakost_160420016.view.FavoriteListFragment"
+        android:label="fragment_favorite_list"
+        tools:layout="@layout/fragment_favorite_list" >
+        <action
+            android:id="@+id/action_favoriteListFragment_to_kostListFragment"
+            app:destination="@id/kostListFragment" />
+    </fragment>
+</navigation>
