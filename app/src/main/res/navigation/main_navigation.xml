@@ -11,20 +11,23 @@
         android:label="fragment_kost_list"
         tools:layout="@layout/fragment_kost_list" >
         <action
-            android:id="@+id/action_kostListFragment_to_kostDetailFragment"
+            android:id="@+id/action_home_to_kost_detail"
             app:destination="@id/kostDetailFragment" />
         <action
-            android:id="@+id/action_kostListFragment_to_riwayatListFragment"
+            android:id="@+id/action_home_to_riwayat"
             app:destination="@id/itemHistory" />
         <action
-            android:id="@+id/action_kostListFragment_to_pesananListFragment"
+            android:id="@+id/action_home_to_pesanan"
             app:destination="@id/itemOrder" />
         <action
-            android:id="@+id/action_kostListFragment_to_profileFragment"
+            android:id="@+id/action_home_to_profile"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_kostListFragment_to_favoriteListFragment"
+            android:id="@+id/action_home_to_favorite"
             app:destination="@id/favoriteListFragment" />
+        <action
+            android:id="@+id/action_home_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -32,10 +35,10 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
+            android:id="@+id/action_login_to_register"
             app:destination="@id/registerFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_kostListFragment"
+            android:id="@+id/action_login_to_home"
             app:destination="@id/itemHome" />
     </fragment>
     <fragment
@@ -44,7 +47,7 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
+            android:id="@+id/action_register_to_login"
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
@@ -53,7 +56,7 @@
         android:label="fragment_kost_detail"
         tools:layout="@layout/fragment_kost_detail" >
         <action
-            android:id="@+id/action_kostDetailFragment_to_kostListFragment"
+            android:id="@+id/action_kost_detail_to_home"
             app:destination="@id/itemHome" />
     </fragment>
     <fragment
@@ -62,8 +65,14 @@
         android:label="fragment_riwayat_list"
         tools:layout="@layout/fragment_riwayat_list" >
         <action
-            android:id="@+id/action_riwayatListFragment_to_kostListFragment"
+            android:id="@+id/action_riwayat_to_home"
             app:destination="@id/itemHome" />
+        <action
+            android:id="@+id/action_history_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_history_to_pesanan"
+            app:destination="@id/favoriteListFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemOrder"
@@ -71,8 +80,14 @@
         android:label="fragment_pesanan_list"
         tools:layout="@layout/fragment_pesanan_list" >
         <action
-            android:id="@+id/action_pesananListFragment_to_kostListFragment"
+            android:id="@+id/action_pesanan_to_home"
             app:destination="@id/itemHome" />
+        <action
+            android:id="@+id/action_pesanan_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_pesanan_to_favorite"
+            app:destination="@id/favoriteListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -80,7 +95,7 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_kostListFragment"
+            android:id="@+id/action_profile_to_home"
             app:destination="@id/itemHome" />
     </fragment>
     <fragment
@@ -89,7 +104,7 @@
         android:label="fragment_favorite_list"
         tools:layout="@layout/fragment_favorite_list" >
         <action
-            android:id="@+id/action_favoriteListFragment_to_kostListFragment"
+            android:id="@+id/action_favorite_to_home"
             app:destination="@id/itemHome" />
     </fragment>
 </navigation>
