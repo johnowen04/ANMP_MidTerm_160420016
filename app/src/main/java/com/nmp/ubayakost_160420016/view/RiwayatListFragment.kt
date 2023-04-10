@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nmp.ubayakost_160420016.R
-import com.nmp.ubayakost_160420016.view.adapter.RiwayatAdapter
+import com.nmp.ubayakost_160420016.view.adapter.PesananAdapter
 import com.nmp.ubayakost_160420016.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_riwayat_list.*
 
 class RiwayatListFragment : Fragment() {
     private lateinit var orderViewModel: OrderViewModel
 
-    private lateinit var adapter: RiwayatAdapter
+    private lateinit var adapter: PesananAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class RiwayatListFragment : Fragment() {
         orderViewModel = ViewModelProvider(this)[OrderViewModel::class.java]
         orderViewModel.fetch("riwayat") { }
 
-        adapter = RiwayatAdapter(arrayListOf())
+        adapter = PesananAdapter(arrayListOf(), "riwayat")
 
         rvRiwayat.layoutManager = LinearLayoutManager(context)
         rvRiwayat.adapter = adapter
@@ -39,7 +39,7 @@ class RiwayatListFragment : Fragment() {
 
     private fun observeViewModel() {
         orderViewModel.orderLiveData.observe(viewLifecycleOwner) {
-            adapter.updateRiwayatList(it)
+            adapter.updatePesananList(it)
         }
     }
 }

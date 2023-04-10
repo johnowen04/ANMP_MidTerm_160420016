@@ -29,7 +29,7 @@ class PesananListFragment : Fragment() {
         orderViewModel = ViewModelProvider(this)[OrderViewModel::class.java]
         orderViewModel.fetch("pesanan") { }
 
-        adapter = PesananAdapter(arrayListOf())
+        adapter = PesananAdapter(arrayListOf(), "pesanan")
 
         rvPesanan.layoutManager = LinearLayoutManager(context)
         rvPesanan.adapter = adapter

@@ -13,7 +13,8 @@ import com.nmp.ubayakost_160420016.view.KostListFragmentDirections
 import kotlinx.android.synthetic.main.item_order.view.*
 
 class PesananAdapter(
-    private val pesananList: ArrayList<Order>
+    private val pesananList: ArrayList<Order>,
+    private val fragment: String
 ): RecyclerView.Adapter<PesananAdapter.KostViewHolder>() {
     class KostViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
@@ -35,7 +36,7 @@ class PesananAdapter(
             txtOwnerItemOrder.text = order.kost.owner
             ratingBarItemOrder.rating = order.kost.rating
             txtRatingItemOrder.text = "${order.kost.rating}"
-            txtLastBookedDateItemOrder.text = "Booked at ${order.dateBooked}"
+            txtLastBookedDateItemOrder.text = if (fragment == "riwayat") "Last booked ${order.dateBooked}" else "Booked at ${order.dateBooked}"
             txtLastStayDateItemOrder.text = "Stay until ${order.dateStayedUntil}"
             txtPaymentMethodItemOrder.text = "Paid using ${order.paymentMethod}"
         }
