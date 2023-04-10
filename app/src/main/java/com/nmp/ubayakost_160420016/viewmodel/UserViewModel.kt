@@ -25,6 +25,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     private val sharedPreferences = SharedPreferencesProvider(application.applicationContext)
 
+    fun getUserFromSharedPref() = sharedPreferences.getUser()
+
     // Login Function - Used to handle login process
     fun login(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
@@ -40,7 +42,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
                     val result = Gson().fromJson(data, User::class.java)
                     user.value = result
 
-                    sharedPreferences.sessionLogin(username)
+                    sharedPreferences.sessionLogin(username, data)
                     onSuccess(true, obj.getString("message"))
                 } else {
                     onSuccess(false, obj.getString("message"))
@@ -64,6 +66,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     // Check if user isLoggedOn or not
     fun isLogin(): Boolean = sharedPreferences.isLogin()
+
+    fun logout() = sharedPreferences.logout()
 
     // Register function - Used to register new user
     fun register(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {

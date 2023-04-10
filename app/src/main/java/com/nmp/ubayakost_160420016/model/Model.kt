@@ -8,6 +8,8 @@ data class User(
     val firstName: String,
     @SerializedName("lastname")
     val lastName: String,
+    @SerializedName("created_at")
+    val createdAt: String
 )
 
 data class Kost(

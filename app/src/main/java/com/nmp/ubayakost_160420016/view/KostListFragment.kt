@@ -1,10 +1,12 @@
 package com.nmp.ubayakost_160420016.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,8 @@ import com.nmp.ubayakost_160420016.R
 import com.nmp.ubayakost_160420016.view.adapter.KostAdapter
 import com.nmp.ubayakost_160420016.viewmodel.KostViewModel
 import com.nmp.ubayakost_160420016.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.drawer_header.view.*
 import kotlinx.android.synthetic.main.fragment_kost_list.*
 
 class KostListFragment : Fragment() {
@@ -34,6 +38,23 @@ class KostListFragment : Fragment() {
         if (!userViewModel.isLogin()) {
             val action = KostListFragmentDirections.actionHomeToLogin()
             Navigation.findNavController(view).navigate(action)
+        }
+
+        activity?.navView?.let {
+            it.btnLogOutHeader?.setOnClickListener {
+                userViewModel.logout()
+                Log.d("Logout Button", "Clicked")
+                Toast.makeText(requireContext(), "Logout button header", Toast.LENGTH_SHORT).show()
+                val action = KostListFragmentDirections.actionHomeToLogin()
+                Navigation.findNavController(view).navigate(action)
+            }
+
+            it.imgAvatar?.setOnClickListener {
+                Log.d("Avatar", "Clicked")
+                Toast.makeText(requireContext(), "Avatar clicked", Toast.LENGTH_SHORT).show()
+                val action = KostListFragmentDirections.actionHomeToProfile()
+                Navigation.findNavController(view).navigate(action)
+            }
         }
 
         kostViewModel = ViewModelProvider(this)[KostViewModel::class.java]

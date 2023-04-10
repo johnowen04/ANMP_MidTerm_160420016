@@ -2,7 +2,9 @@ package com.nmp.ubayakost_160420016.util
 
 import android.util.Log
 import android.widget.ImageView
+import com.google.gson.Gson
 import com.nmp.ubayakost_160420016.R
+import com.nmp.ubayakost_160420016.model.User
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
@@ -24,3 +26,5 @@ fun ImageView.loadImage(url: String?) {
 
         })
 }
+
+fun String.toUser(): User = Gson().fromJson(this, User::class.java)
