@@ -26,7 +26,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     private val sharedPreferences = SharedPreferencesProvider(application.applicationContext)
 
     // Login Function - Used to handle login process
-    fun login(username: String, password: String, onSuccess: (success: Boolean) -> Unit) {
+    fun login(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
         val url = "http://10.0.2.2/anmp/ubayakost_api/login.php"
         val stringRequest = object: StringRequest(
@@ -41,9 +41,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
                     user.value = result
 
                     sharedPreferences.sessionLogin(username)
-                    onSuccess(true)
+                    onSuccess(true, obj.getString("message"))
                 } else {
-                    onSuccess(false)
+                    onSuccess(false, obj.getString("message"))
                 }
             },
             {

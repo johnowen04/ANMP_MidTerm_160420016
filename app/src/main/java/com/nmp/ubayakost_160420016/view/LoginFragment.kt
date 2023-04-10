@@ -46,12 +46,11 @@ class LoginFragment : Fragment() {
             val password = editPassword.text.toString()
 
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.login(username, password) {
-                    if (it) {
+                viewModel.login(username, password) { success, message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    if (success) {
                         val action = LoginFragmentDirections.actionLoginToHome()
                         Navigation.findNavController(view).navigate(action)
-                    } else {
-                        Toast.makeText(requireContext(), "Username or password incorrect.", Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
