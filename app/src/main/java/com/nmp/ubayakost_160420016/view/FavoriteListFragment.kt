@@ -5,14 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nmp.ubayakost_160420016.R
 import com.nmp.ubayakost_160420016.view.adapter.KostAdapter
 import com.nmp.ubayakost_160420016.viewmodel.KostViewModel
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
-import kotlinx.android.synthetic.main.fragment_kost_list.*
 
 class FavoriteListFragment : Fragment() {
     private lateinit var kostViewModel: KostViewModel

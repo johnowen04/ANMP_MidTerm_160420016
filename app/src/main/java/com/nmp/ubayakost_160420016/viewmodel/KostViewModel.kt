@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -16,6 +15,7 @@ import org.json.JSONObject
 
 class KostViewModel(application: Application): AndroidViewModel(application) {
     val kostLiveData = MutableLiveData<ArrayList<Kost>>()
+    val selectedKostLiveData = MutableLiveData<Kost>()
 
     private val TAG = "ubayaKostUserTAG"
     private var queue: RequestQueue? = null
@@ -27,7 +27,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
         queue = Volley.newRequestQueue(getApplication())
         val url = "http://10.0.2.2/anmp/ubayakost_api/get_all_kost.php"
         val stringRequest = object: StringRequest(
-            Request.Method.POST, url,
+            Method.POST, url,
             {
                 Log.d("showvolley", it)
                 val obj = JSONObject(it)
@@ -60,7 +60,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
         queue = Volley.newRequestQueue(getApplication())
         val url = "http://10.0.2.2/anmp/ubayakost_api/get_favorite_kost.php"
         val stringRequest = object: StringRequest(
-            Request.Method.POST, url,
+            Method.POST, url,
             {
                 Log.d("showvolley", it)
                 val obj = JSONObject(it)
@@ -93,7 +93,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
         queue = Volley.newRequestQueue(getApplication())
         val url = "http://10.0.2.2/anmp/ubayakost_api/set_favorite_kost.php"
         val stringRequest = object: StringRequest(
-            Request.Method.POST, url,
+            Method.POST, url,
             {
                 Log.d("showvolley", it)
                 val obj = JSONObject(it)
@@ -112,6 +112,40 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
                 return mutableMapOf(
                     "username" to sharedPreferences.getUsername(),
                     "properties_id" to id.toString()
+                )
+            }
+        }
+
+        stringRequest.apply { tag = TAG }
+
+        queue?.add(stringRequest)
+    }
+
+    fun fetchDetails(id: Int, onCompletion: (success: Boolean) -> Unit) {
+        queue = Volley.newRequestQueue(getApplication())
+        val url = "http://10.0.2.2/anmp/ubayakost_api/get_detail_kost.php"
+        val stringRequest = object: StringRequest(
+            Method.POST, url,
+            {
+                Log.d("showvolley", it)
+                val obj = JSONObject(it)
+
+                if (obj.getString("result") == "success") {
+                    val data = obj.getString("data")
+                    val mType = object : TypeToken<Kost>() { }.type
+                    val result = Gson().fromJson<Kost>(data, mType)
+                    selectedKostLiveData.value = result
+                    onCompletion(true)
+                }
+            },
+            {
+                Log.e("showvolley", it.toString())
+            }
+        ) {
+            override fun getParams(): MutableMap<String, String> {
+                return mutableMapOf(
+                    "id" to id.toString(),
+                    "username" to sharedPreferences.getUsername()
                 )
             }
         }

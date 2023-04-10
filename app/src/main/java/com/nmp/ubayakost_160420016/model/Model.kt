@@ -22,9 +22,9 @@ data class Kost(
     val rating: Float,
     @SerializedName("main_photo")
     val mainPhoto: String,
-    @SerializedName("types_id")
+    @SerializedName("types")
     val types: String,
-    @SerializedName("bathroom_types_id")
+    @SerializedName("bathroom_types")
     val bathroomType: String,
     val owner: String,
     @SerializedName("is_favorite")
@@ -38,5 +38,6 @@ data class Order(
     val dateBooked: String,
     @SerializedName("date_until")
     val dateStayedUntil: String,
+    @SerializedName("payment_method")
     val paymentMethod: String
 )

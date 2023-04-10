@@ -55,10 +55,10 @@ class KostAdapter(
 
             this.setOnClickListener {
                 if (fragment == "home") {
-                    val action = KostListFragmentDirections.actionHomeToKostDetail("home")
+                    val action = KostListFragmentDirections.actionHomeToKostDetail("home", kost.id)
                     Navigation.findNavController(this).navigate(action)
                 } else {
-                    val action = FavoriteListFragmentDirections.actionFavoriteToKostDetail("favorite")
+                    val action = FavoriteListFragmentDirections.actionFavoriteToKostDetail("favorite", kost.id)
                     Navigation.findNavController(this).navigate(action)
                 }
             }
