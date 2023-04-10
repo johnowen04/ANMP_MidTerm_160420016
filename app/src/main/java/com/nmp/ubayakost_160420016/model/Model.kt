@@ -28,3 +28,13 @@ data class Kost(
     val bathroomType: String,
     val owner: String
 )
+
+data class Order(
+    @SerializedName("property_data")
+    val kost: Kost,
+    @SerializedName("created_at")
+    val dateBooked: String,
+    @SerializedName("date_until")
+    val dateStayedUntil: String,
+    val paymentMethod: String
+)
