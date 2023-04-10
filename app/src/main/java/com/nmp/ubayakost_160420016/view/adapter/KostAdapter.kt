@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nmp.ubayakost_160420016.R
 import com.nmp.ubayakost_160420016.model.Kost
 import com.nmp.ubayakost_160420016.util.loadImage
+import com.nmp.ubayakost_160420016.view.FavoriteListFragmentDirections
 import com.nmp.ubayakost_160420016.view.KostListFragmentDirections
 import kotlinx.android.synthetic.main.item_kost.view.*
 
 class KostAdapter(
-    private val kostList: ArrayList<Kost>
+    private val kostList: ArrayList<Kost>,
+    private val fragment: String,
+    val favorite: (Int) -> Unit
 ): RecyclerView.Adapter<KostAdapter.KostViewHolder>() {
     class KostViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
@@ -38,9 +41,26 @@ class KostAdapter(
             txtBedroomItemKost.text = "${kost.capacity}"
             txtBathroomItemKost.text = "${kost.bathroom}"
 
+            imgBtnFavoriteItemKost.setImageResource(
+                if (kost.isFavorite) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
+            )
+
+            imgBtnFavoriteItemKost.setOnClickListener {
+                kost.isFavorite = !kost.isFavorite
+                favorite(kost.id)
+                imgBtnFavoriteItemKost.setImageResource(
+                    if (kost.isFavorite) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
+                )
+            }
+
             this.setOnClickListener {
-                val action = KostListFragmentDirections.actionHomeToKostDetail()
-                Navigation.findNavController(this).navigate(action)
+                if (fragment == "home") {
+                    val action = KostListFragmentDirections.actionHomeToKostDetail("home")
+                    Navigation.findNavController(this).navigate(action)
+                } else {
+                    val action = FavoriteListFragmentDirections.actionFavoriteToKostDetail("favorite")
+                    Navigation.findNavController(this).navigate(action)
+                }
             }
         }
     }

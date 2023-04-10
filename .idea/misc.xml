@@ -8,9 +8,11 @@
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_favorite_list.xml" value="0.2015625" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_kost_list.xml" value="0.38697916666666665" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_login.xml" value="0.38697916666666665" />
+        <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_pesanan_list.xml" value="0.33055555555555555" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_profile.xml" value="0.38697916666666665" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_register.xml" value="0.38697916666666665" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/fragment_riwayat_list.xml" value="0.38697916666666665" />
+        <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/item_favorite.xml" value="0.38697916666666665" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/item_kost.xml" value="0.33" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/item_order.xml" value="0.38697916666666665" />
         <entry key="..\:/.dev/android-projects/UbayaKost_160420016/app/src/main/res/layout/item_riwayat.xml" value="0.5" />

@@ -58,6 +58,12 @@
         <action
             android:id="@+id/action_kost_detail_to_home"
             app:destination="@id/itemHome" />
+        <action
+            android:id="@+id/action_kost_detail_to_favorite"
+            app:destination="@id/favoriteListFragment" />
+        <argument
+            android:name="fromFragment"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/itemHistory"
@@ -106,5 +112,8 @@
         <action
             android:id="@+id/action_favorite_to_home"
             app:destination="@id/itemHome" />
+        <action
+            android:id="@+id/action_favorite_to_kost_detail"
+            app:destination="@id/kostDetailFragment" />
     </fragment>
 </navigation>

@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.nmp.ubayakost_160420016.model.Kost
+import com.nmp.ubayakost_160420016.util.SharedPreferencesProvider
 import org.json.JSONObject
 
 class KostViewModel(application: Application): AndroidViewModel(application) {
@@ -19,11 +20,13 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
     private val TAG = "ubayaKostUserTAG"
     private var queue: RequestQueue? = null
 
+    private val sharedPreferences = SharedPreferencesProvider(application.applicationContext)
+
     // Fetch Method - Used to fetch properties data from database using api call
     fun fetch(onCompletion: (success: Boolean) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
         val url = "http://10.0.2.2/anmp/ubayakost_api/get_all_kost.php"
-        val stringRequest = StringRequest(
+        val stringRequest = object: StringRequest(
             Request.Method.POST, url,
             {
                 Log.d("showvolley", it)
@@ -40,7 +43,78 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
             {
                 Log.e("showvolley", it.toString())
             }
-        )
+        ) {
+            override fun getParams(): MutableMap<String, String> {
+                return mutableMapOf(
+                    "username" to sharedPreferences.getUsername()
+                )
+            }
+        }
+
+        stringRequest.apply { tag = TAG }
+
+        queue?.add(stringRequest)
+    }
+
+    fun fetchFavorite(onCompletion: (success: Boolean) -> Unit) {
+        queue = Volley.newRequestQueue(getApplication())
+        val url = "http://10.0.2.2/anmp/ubayakost_api/get_favorite_kost.php"
+        val stringRequest = object: StringRequest(
+            Request.Method.POST, url,
+            {
+                Log.d("showvolley", it)
+                val obj = JSONObject(it)
+
+                if (obj.getString("result") == "success") {
+                    val data = obj.getString("data")
+                    val mType = object : TypeToken<ArrayList<Kost>>() { }.type
+                    val result = Gson().fromJson<ArrayList<Kost>>(data, mType)
+                    kostLiveData.value = result
+                    onCompletion(true)
+                }
+            },
+            {
+                Log.e("showvolley", it.toString())
+            }
+        ) {
+            override fun getParams(): MutableMap<String, String> {
+                return mutableMapOf(
+                    "username" to sharedPreferences.getUsername()
+                )
+            }
+        }
+
+        stringRequest.apply { tag = TAG }
+
+        queue?.add(stringRequest)
+    }
+
+    fun favorite(id: Int, onCompletion: (success: Boolean) -> Unit) {
+        queue = Volley.newRequestQueue(getApplication())
+        val url = "http://10.0.2.2/anmp/ubayakost_api/set_favorite_kost.php"
+        val stringRequest = object: StringRequest(
+            Request.Method.POST, url,
+            {
+                Log.d("showvolley", it)
+                val obj = JSONObject(it)
+
+                if (obj.getString("result") == "success") {
+                    onCompletion(true)
+                } else {
+                    onCompletion(false)
+                }
+            },
+            {
+                Log.e("showvolley", it.toString())
+            }
+        ) {
+            override fun getParams(): MutableMap<String, String> {
+                return mutableMapOf(
+                    "username" to sharedPreferences.getUsername(),
+                    "properties_id" to id.toString()
+                )
+            }
+        }
 
         stringRequest.apply { tag = TAG }
 

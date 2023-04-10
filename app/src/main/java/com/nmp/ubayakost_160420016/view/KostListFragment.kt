@@ -39,7 +39,9 @@ class KostListFragment : Fragment() {
         kostViewModel = ViewModelProvider(this)[KostViewModel::class.java]
         kostViewModel.fetch() { }
 
-        adapter = KostAdapter(arrayListOf())
+        adapter = KostAdapter(arrayListOf(), "home") {
+            kostViewModel.favorite(it) { }
+        }
 
         rvKostHome.layoutManager = LinearLayoutManager(context)
         rvKostHome.adapter = adapter
@@ -47,6 +49,11 @@ class KostListFragment : Fragment() {
         swipeRefreshHome.setOnRefreshListener {
             kostViewModel.fetch() { swipeRefreshHome.isRefreshing = !it }
             observeViewModel()
+        }
+
+        imgBtnFavorite.setOnClickListener {
+            val action = KostListFragmentDirections.actionHomeToFavorite()
+            Navigation.findNavController(it).navigate(action)
         }
 
         observeViewModel()

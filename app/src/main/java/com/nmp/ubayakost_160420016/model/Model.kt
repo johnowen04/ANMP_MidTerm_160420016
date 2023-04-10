@@ -26,7 +26,9 @@ data class Kost(
     val types: String,
     @SerializedName("bathroom_types_id")
     val bathroomType: String,
-    val owner: String
+    val owner: String,
+    @SerializedName("is_favorite")
+    var isFavorite: Boolean
 )
 
 data class Order(
