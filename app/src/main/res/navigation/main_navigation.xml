@@ -74,7 +74,7 @@
         android:label="fragment_riwayat_list"
         tools:layout="@layout/fragment_riwayat_list" >
         <action
-            android:id="@+id/action_riwayat_to_home"
+            android:id="@+id/action_history_to_home"
             app:destination="@id/itemHome" />
         <action
             android:id="@+id/action_history_to_profile"
@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_history_to_pesanan"
             app:destination="@id/favoriteListFragment" />
+        <action
+            android:id="@+id/action_history_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemOrder"
@@ -97,6 +100,9 @@
         <action
             android:id="@+id/action_pesanan_to_favorite"
             app:destination="@id/favoriteListFragment" />
+        <action
+            android:id="@+id/action_pesanan_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -106,6 +112,15 @@
         <action
             android:id="@+id/action_profile_to_home"
             app:destination="@id/itemHome" />
+        <argument
+            android:name="fromFragment"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_profile_to_riwayat"
+            app:destination="@id/itemHistory" />
+        <action
+            android:id="@+id/action_profile_to_pesanan"
+            app:destination="@id/itemOrder" />
     </fragment>
     <fragment
         android:id="@+id/favoriteListFragment"

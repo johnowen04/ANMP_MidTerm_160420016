@@ -1,5 +1,6 @@
 package com.nmp.ubayakost_160420016.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +32,18 @@ class KostListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.let {
+            it.onBackPressedDispatcher.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    activity?.moveTaskToBack(true)
+                }
+            })
+
+            it.drawerButton.visibility = View.VISIBLE
+            it.bottomNav.visibility = View.VISIBLE
+            it.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_kost_list, container, false)
     }
@@ -40,8 +56,13 @@ class KostListFragment : Fragment() {
             Navigation.findNavController(view).navigate(action)
         }
 
-        activity?.navView?.let {
-            it.btnLogOutHeader?.setOnClickListener {
+        val user = userViewModel.getUserFromSharedPref()
+
+        activity?.navView?.getHeaderView(0).let {
+            it?.txtNameHeader?.text = if (user.firstName.isEmpty()) "No Name" else "${user.firstName} ${user.lastName}"
+            it?.txtUsernameHeader?.text = user.username
+
+            it?.btnLogOutHeader?.setOnClickListener {
                 userViewModel.logout()
                 Log.d("Logout Button", "Clicked")
                 Toast.makeText(requireContext(), "Logout button header", Toast.LENGTH_SHORT).show()
@@ -49,10 +70,11 @@ class KostListFragment : Fragment() {
                 Navigation.findNavController(view).navigate(action)
             }
 
-            it.imgAvatar?.setOnClickListener {
+            it?.imgAvatar?.setOnClickListener { v2 ->
                 Log.d("Avatar", "Clicked")
                 Toast.makeText(requireContext(), "Avatar clicked", Toast.LENGTH_SHORT).show()
-                val action = KostListFragmentDirections.actionHomeToProfile()
+                activity?.drawerLayout?.closeDrawer(GravityCompat.START)
+                val action = KostListFragmentDirections.actionHomeToProfile("home")
                 Navigation.findNavController(view).navigate(action)
             }
         }
@@ -80,9 +102,17 @@ class KostListFragment : Fragment() {
         observeViewModel()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observeViewModel() {
         kostViewModel.kostLiveData.observe(viewLifecycleOwner) {
             adapter.updateKostList(it)
+        }
+
+        userViewModel.user.observe(viewLifecycleOwner) { user ->
+            activity?.navView.let {
+                it?.txtNameHeader?.text = if (user.firstName.isEmpty()) "No Name" else "${user.firstName} ${user.lastName}"
+                it?.txtUsernameHeader?.text = user.username
+            }
         }
     }
 }

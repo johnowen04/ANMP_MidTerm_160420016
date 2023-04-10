@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.nmp.ubayakost_160420016.R
 import com.nmp.ubayakost_160420016.util.loadImage
 import com.nmp.ubayakost_160420016.viewmodel.KostViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_kost_detail.*
 
 class KostDetailFragment : Fragment() {
@@ -19,6 +23,12 @@ class KostDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.let {
+            it.drawerButton.visibility = View.GONE
+            it.bottomNav.visibility = View.GONE
+            it.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_kost_detail, container, false)
     }
@@ -27,6 +37,20 @@ class KostDetailFragment : Fragment() {
         val id = KostDetailFragmentArgs.fromBundle(requireArguments()).id
         kostViewModel = ViewModelProvider(this)[KostViewModel::class.java]
         kostViewModel.fetchDetails(id) { }
+
+        var fromFragment: String
+
+        arguments.let {
+            fromFragment = KostDetailFragmentArgs.fromBundle(requireArguments()).fromFragment
+        }
+
+        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val action = if (fromFragment == "home") KostDetailFragmentDirections.actionKostDetailToHome()
+                            else KostDetailFragmentDirections.actionKostDetailToFavorite()
+                Navigation.findNavController(view).navigate(action)
+            }
+        })
 
         observeViewModel()
     }
