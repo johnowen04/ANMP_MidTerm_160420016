@@ -11,7 +11,6 @@ import com.nmp.ubayakost_160420016.R
 import com.nmp.ubayakost_160420016.util.loadImage
 import com.nmp.ubayakost_160420016.viewmodel.KostViewModel
 import kotlinx.android.synthetic.main.fragment_kost_detail.*
-import kotlinx.android.synthetic.main.item_kost.view.*
 
 class KostDetailFragment : Fragment() {
     private lateinit var kostViewModel: KostViewModel
@@ -34,20 +33,28 @@ class KostDetailFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun observeViewModel() {
-        kostViewModel.selectedKostLiveData.observe(viewLifecycleOwner) {
-            imgKostDetailKost.loadImage(it.mainPhoto)
-            txtNamaDetailKost.text = it.name
-            txtLocationDetailKost.text = "${it.distance} meter"
-            txtPriceDetailKost.text = "$${it.pricePerMonth}"
-            txtOwnerDetailKost.text = it.owner
-            txtPropertyTypeDetailKost.text = "Kost ${it.types}"
-            txtBathroomTypeDetailKost.text = "Kamar Mandi ${it.bathroomType}"
-            ratingBarDetailKost.rating = it.rating
+        kostViewModel.selectedKostLiveData.observe(viewLifecycleOwner) { kost ->
+            imgKostDetailKost.loadImage(kost.mainPhoto)
+            txtNamaDetailKost.text = kost.name
+            txtLocationDetailKost.text = "${kost.distance} meter"
+            txtPriceDetailKost.text = "$${kost.pricePerMonth}"
+            txtOwnerDetailKost.text = kost.owner
+            txtPropertyTypeDetailKost.text = "Kost ${kost.types}"
+            txtBathroomTypeDetailKost.text = "Kamar Mandi ${kost.bathroomType}"
+            ratingBarDetailKost.rating = kost.rating
             imgBtnFavoriteDetailKost.setImageResource(
-                if (it.isFavorite) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
+                if (kost.isFavorite) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
             )
-            txtBedroomDetailKost.text = "${it.capacity}"
-            txtBathroomDetailKost.text = "${it.bathroom}"
+            txtBedroomDetailKost.text = "${kost.capacity}"
+            txtBathroomDetailKost.text = "${kost.bathroom}"
+
+            imgBtnFavoriteDetailKost.setOnClickListener {
+                kost.isFavorite = !kost.isFavorite
+                kostViewModel.favorite(kost.id) {}
+                imgBtnFavoriteDetailKost.setImageResource(
+                    if (kost.isFavorite) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
+                )
+            }
         }
     }
 }
