@@ -46,6 +46,11 @@ class FavoriteListFragment : Fragment() {
             }
         })
 
+        imgBtnBackFavorite.setOnClickListener {
+            val action = FavoriteListFragmentDirections.actionFavoriteToHome()
+            Navigation.findNavController(view).navigate(action)
+        }
+
         adapter = KostAdapter(arrayListOf(), "favorite") {
             kostViewModel.favorite(it) { }
         }

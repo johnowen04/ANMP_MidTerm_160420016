@@ -45,6 +45,11 @@ class RegisterFragment : Fragment() {
             }
         })
 
+        imgBtnBackRegister.setOnClickListener {
+            val action = RegisterFragmentDirections.actionRegisterToLogin()
+            Navigation.findNavController(view).navigate(action)
+        }
+
         viewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         btnCreateAccRegister.setOnClickListener {

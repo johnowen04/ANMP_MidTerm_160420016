@@ -52,6 +52,15 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        imgBtnBackProfile.setOnClickListener {
+            val action = when (fromFragment) {
+                "home" -> ProfileFragmentDirections.actionProfileToHome()
+                "order" -> ProfileFragmentDirections.actionProfileToPesanan()
+                else -> ProfileFragmentDirections.actionProfileToRiwayat()
+            }
+            Navigation.findNavController(view).navigate(action)
+        }
+
         val user = userViewModel.getUserFromSharedPref()
 
         txtNameProfile.text = if (user.firstName.isEmpty()) "No Name" else "${user.firstName} ${user.lastName}"

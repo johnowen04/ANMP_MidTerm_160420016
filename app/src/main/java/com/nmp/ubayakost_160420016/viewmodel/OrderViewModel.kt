@@ -23,7 +23,7 @@ class OrderViewModel(application: Application): AndroidViewModel(application) {
     private val sharedPreferences = SharedPreferencesProvider(application.applicationContext)
 
     // Fetch Method - Used to fetch riwayat data from database using api call
-    fun fetch(type: String, onCompletion: (success: Boolean) -> Unit) {
+    fun fetch(type: String) {
         queue = Volley.newRequestQueue(getApplication())
         val url = "http://10.0.2.2/anmp/ubayakost_api/get_all_order.php"
         val stringRequest = object : StringRequest(
@@ -37,7 +37,6 @@ class OrderViewModel(application: Application): AndroidViewModel(application) {
                     val mType = object : TypeToken<ArrayList<Order>>() { }.type
                     val result = Gson().fromJson<ArrayList<Order>>(data, mType)
                     orderLiveData.value = result
-                    onCompletion(true)
                 }
             },
             {

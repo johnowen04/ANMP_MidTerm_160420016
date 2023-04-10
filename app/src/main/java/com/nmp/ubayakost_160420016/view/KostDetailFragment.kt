@@ -46,11 +46,22 @@ class KostDetailFragment : Fragment() {
 
         activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val action = if (fromFragment == "home") KostDetailFragmentDirections.actionKostDetailToHome()
-                            else KostDetailFragmentDirections.actionKostDetailToFavorite()
+                val action = when (fromFragment) {
+                    "home" -> KostDetailFragmentDirections.actionKostDetailToHome()
+                    else -> KostDetailFragmentDirections.actionKostDetailToFavorite()
+                }
                 Navigation.findNavController(view).navigate(action)
             }
         })
+
+        imgBtnBackDetailKost.setOnClickListener {
+            val action = when (fromFragment) {
+                "home" -> KostDetailFragmentDirections.actionKostDetailToHome()
+                else -> KostDetailFragmentDirections.actionKostDetailToFavorite()
+            }
+            Navigation.findNavController(view).navigate(action)
+
+        }
 
         observeViewModel()
     }

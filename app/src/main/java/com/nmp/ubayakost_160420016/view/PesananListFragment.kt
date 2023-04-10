@@ -41,7 +41,14 @@ class PesananListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         orderViewModel = ViewModelProvider(this)[OrderViewModel::class.java]
-        orderViewModel.fetch("pesanan") { }
+        orderViewModel.fetch("pesanan")
+
+        adapter = PesananAdapter(arrayListOf(), "pesanan")
+
+        rvPesanan.layoutManager = LinearLayoutManager(context)
+        rvPesanan.adapter = adapter
+
+        observeViewModel()
 
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
         val user = userViewModel.getUserFromSharedPref()
@@ -69,13 +76,6 @@ class PesananListFragment : Fragment() {
                 Navigation.findNavController(view).navigate(action)
             }
         })
-
-        adapter = PesananAdapter(arrayListOf(), "pesanan")
-
-        rvPesanan.layoutManager = LinearLayoutManager(context)
-        rvPesanan.adapter = adapter
-
-        observeViewModel()
     }
 
     private fun observeViewModel() {

@@ -41,7 +41,14 @@ class RiwayatListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         orderViewModel = ViewModelProvider(this)[OrderViewModel::class.java]
-        orderViewModel.fetch("riwayat") { }
+        orderViewModel.fetch("riwayat")
+
+        adapter = PesananAdapter(arrayListOf(), "riwayat")
+
+        rvRiwayat.layoutManager = LinearLayoutManager(context)
+        rvRiwayat.adapter = adapter
+
+        observeViewModel()
 
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
         val user = userViewModel.getUserFromSharedPref()
@@ -69,13 +76,6 @@ class RiwayatListFragment : Fragment() {
                 Navigation.findNavController(view).navigate(action)
             }
         })
-
-        adapter = PesananAdapter(arrayListOf(), "riwayat")
-
-        rvRiwayat.layoutManager = LinearLayoutManager(context)
-        rvRiwayat.adapter = adapter
-
-        observeViewModel()
     }
 
     private fun observeViewModel() {
