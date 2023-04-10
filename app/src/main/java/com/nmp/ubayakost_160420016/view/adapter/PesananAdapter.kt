@@ -10,12 +10,11 @@ import com.nmp.ubayakost_160420016.R
 import com.nmp.ubayakost_160420016.model.Order
 import com.nmp.ubayakost_160420016.util.loadImage
 import com.nmp.ubayakost_160420016.view.KostListFragmentDirections
-import com.nmp.ubayakost_160420016.view.RiwayatListFragmentDirections
 import kotlinx.android.synthetic.main.item_order.view.*
 
-class RiwayatAdapter(
-    private val riwayatList: ArrayList<Order>
-): RecyclerView.Adapter<RiwayatAdapter.KostViewHolder>() {
+class PesananAdapter(
+    private val pesananList: ArrayList<Order>
+): RecyclerView.Adapter<PesananAdapter.KostViewHolder>() {
     class KostViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KostViewHolder {
@@ -26,7 +25,7 @@ class RiwayatAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: KostViewHolder, position: Int) {
-        val order = riwayatList[position]
+        val order = pesananList[position]
 
         with(holder.view) {
             imgKostItemOrder.loadImage(order.kost.mainPhoto)
@@ -36,17 +35,17 @@ class RiwayatAdapter(
             txtOwnerItemOrder.text = order.kost.owner
             ratingBarItemOrder.rating = order.kost.rating
             txtRatingItemOrder.text = "${order.kost.rating}"
-            txtLastBookedDateItemOrder.text = "Last booked ${order.dateBooked}"
+            txtLastBookedDateItemOrder.text = "Booked at ${order.dateBooked}"
             txtLastStayDateItemOrder.text = "Stay until ${order.dateStayedUntil}"
             txtPaymentMethodItemOrder.text = "Paid using ${order.paymentMethod}"
         }
     }
 
-    override fun getItemCount(): Int = riwayatList.size
+    override fun getItemCount(): Int = pesananList.size
 
-    fun updateRiwayatList(newRiwayatList: ArrayList<Order>) {
-        riwayatList.clear()
-        riwayatList.addAll(newRiwayatList)
+    fun updatePesananList(newPesananList: ArrayList<Order>) {
+        pesananList.clear()
+        pesananList.addAll(newPesananList)
         notifyDataSetChanged()
     }
 }

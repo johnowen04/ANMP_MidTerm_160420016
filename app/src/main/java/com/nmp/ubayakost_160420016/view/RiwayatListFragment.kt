@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nmp.ubayakost_160420016.R
-import com.nmp.ubayakost_160420016.view.adapter.KostAdapter
 import com.nmp.ubayakost_160420016.view.adapter.RiwayatAdapter
-import com.nmp.ubayakost_160420016.viewmodel.KostViewModel
 import com.nmp.ubayakost_160420016.viewmodel.OrderViewModel
-import kotlinx.android.synthetic.main.fragment_kost_list.*
+import kotlinx.android.synthetic.main.fragment_riwayat_list.*
 
 class RiwayatListFragment : Fragment() {
     private lateinit var orderViewModel: OrderViewModel
@@ -33,8 +31,8 @@ class RiwayatListFragment : Fragment() {
 
         adapter = RiwayatAdapter(arrayListOf())
 
-        rvKostHome.layoutManager = LinearLayoutManager(context)
-        rvKostHome.adapter = adapter
+        rvRiwayat.layoutManager = LinearLayoutManager(context)
+        rvRiwayat.adapter = adapter
 
         observeViewModel()
     }
