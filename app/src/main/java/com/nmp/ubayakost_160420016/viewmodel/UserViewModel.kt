@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.nmp.ubayakost_160420016.model.User
 import com.nmp.ubayakost_160420016.util.SharedPreferencesProvider
+import com.nmp.ubayakost_160420016.view.MainActivity
 import com.nmp.ubayakost_160420016.view.RegisterFragmentDirections
 import org.json.JSONObject
 
@@ -30,7 +31,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     // Login Function - Used to handle login process
     fun login(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://10.0.2.2/anmp/ubayakost_api/login.php"
+        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/login.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {
@@ -72,7 +73,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     // Register function - Used to register new user
     fun register(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://10.0.2.2/anmp/ubayakost_api/register.php"
+        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/register.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {

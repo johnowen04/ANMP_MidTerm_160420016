@@ -12,6 +12,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.nmp.ubayakost_160420016.model.Order
 import com.nmp.ubayakost_160420016.util.SharedPreferencesProvider
+import com.nmp.ubayakost_160420016.view.MainActivity
 import org.json.JSONObject
 
 class OrderViewModel(application: Application): AndroidViewModel(application) {
@@ -25,7 +26,7 @@ class OrderViewModel(application: Application): AndroidViewModel(application) {
     // Fetch Method - Used to fetch riwayat data from database using api call
     fun fetch(type: String) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://10.0.2.2/anmp/ubayakost_api/get_all_order.php"
+        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/get_all_order.php"
         val stringRequest = object : StringRequest(
             Request.Method.POST, url,
             {
