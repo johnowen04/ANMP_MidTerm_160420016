@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        val LOCALHOST = "10.0.2.2"
+        const val LOCALHOST = "10.0.2.2"
+        const val VALID_URL = "http://$LOCALHOST/anmp/ubayakost_api"
     }
 
     // Instantiate navController and initiate later

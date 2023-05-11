@@ -27,4 +27,8 @@ fun ImageView.loadImage(url: String?) {
         })
 }
 
-fun String.toUser(): User = Gson().fromJson(this, User::class.java)
+fun String.toUser(): User {
+    if (this.isBlank())
+        return User("empty", "empty", "empty", "empty")
+    return Gson().fromJson(this, User::class.java)
+}

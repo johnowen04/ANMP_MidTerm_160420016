@@ -31,7 +31,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     // Login Function - Used to handle login process
     fun login(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/login.php"
+        val url = "${MainActivity.VALID_URL}/login.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {
@@ -73,7 +73,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     // Register function - Used to register new user
     fun register(username: String, password: String, onSuccess: (success: Boolean, message: String?) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/register.php"
+        val url = "${MainActivity.VALID_URL}/register.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {

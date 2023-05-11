@@ -26,7 +26,7 @@ class OrderViewModel(application: Application): AndroidViewModel(application) {
     // Fetch Method - Used to fetch riwayat data from database using api call
     fun fetch(type: String) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/get_all_order.php"
+        val url = "${MainActivity.VALID_URL}/get_all_order.php"
         val stringRequest = object : StringRequest(
             Request.Method.POST, url,
             {

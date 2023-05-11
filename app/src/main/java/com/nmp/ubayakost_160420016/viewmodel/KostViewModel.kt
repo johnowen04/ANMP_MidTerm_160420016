@@ -26,7 +26,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
     // Fetch Method - Used to fetch properties data from database using api call
     fun fetch(onCompletion: (success: Boolean) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/get_all_kost.php"
+        val url = "${MainActivity.VALID_URL}/get_all_kost.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {
@@ -59,7 +59,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
 
     fun fetchFavorite(onCompletion: (success: Boolean) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/get_favorite_kost.php"
+        val url = "${MainActivity.VALID_URL}/get_favorite_kost.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {
@@ -92,7 +92,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
 
     fun favorite(id: Int, onCompletion: (success: Boolean) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/set_favorite_kost.php"
+        val url = "${MainActivity.VALID_URL}/set_favorite_kost.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {
@@ -124,7 +124,7 @@ class KostViewModel(application: Application): AndroidViewModel(application) {
 
     fun fetchDetails(id: Int, onCompletion: (success: Boolean) -> Unit) {
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://${MainActivity.LOCALHOST}/anmp/ubayakost_api/get_detail_kost.php"
+        val url = "${MainActivity.VALID_URL}/get_detail_kost.php"
         val stringRequest = object: StringRequest(
             Method.POST, url,
             {
