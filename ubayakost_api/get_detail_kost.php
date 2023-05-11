@@ -1,5 +1,7 @@
 <?php
-$conn = new mysqli("localhost", "root", "mysql", "anmp_160420016") or die("Connection error: " . $conn->error);
+require_once('env.php');
+
+$conn = new mysqli($_ENV['SERVER_NAME'], $_ENV['USER_NAME'], $_ENV['USER_PASSWORD'], $_ENV['DATABASE_NAME']) or die("Connection error: " . $conn->error);
 
 $arr = [];
 
